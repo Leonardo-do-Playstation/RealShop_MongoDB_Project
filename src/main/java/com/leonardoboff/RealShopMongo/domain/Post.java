@@ -1,29 +1,33 @@
 package com.leonardoboff.RealShopMongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.leonardoboff.RealShopMongo.dtos.AuthorDTO;
+import com.leonardoboff.RealShopMongo.dtos.CommentDTO;
 
 @Document
-public class Post implements Serializable{
+public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
 	private Date date;
 	private String title;
 	private String body;
 	private AuthorDTO author;
-	
+	private List<CommentDTO> comments = new ArrayList<>();
+
 	public Post() {
-		
+
 	}
-		
+
 	public Post(String id, Date date, String title, String body, AuthorDTO author) {
 		this.id = id;
 		this.date = date;
@@ -31,7 +35,7 @@ public class Post implements Serializable{
 		this.body = body;
 		this.author = author;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -63,7 +67,7 @@ public class Post implements Serializable{
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
+
 	public AuthorDTO getAuthor() {
 		return author;
 	}
@@ -77,6 +81,14 @@ public class Post implements Serializable{
 		return Objects.hash(id);
 	}
 
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -87,5 +99,6 @@ public class Post implements Serializable{
 			return false;
 		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
-	}	
+	}
+
 }
