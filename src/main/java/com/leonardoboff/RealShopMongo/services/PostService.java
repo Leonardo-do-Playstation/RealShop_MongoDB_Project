@@ -1,5 +1,6 @@
 package com.leonardoboff.RealShopMongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,7 @@ public class PostService {
 		return user.orElseThrow(() -> new ObjectNotFoundException("Post não encontrado! Id = " + id));
 	}
 	 
+	public List<Post> findByTitle(String text) {
+		return postRepository.findByTitleContainingIgnoreCase(text);
+	}
 }
